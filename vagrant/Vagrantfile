@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ 
+Vagrant.configure("2") do |config|
+ 
+  #mysql
+  config.vm.define "playground-mysql" do |cfg|
+      cfg.vm.box = "centos/7"
+      cfg.vm.provider "virtualbox" do |vb|
+          vb.name = "playground-mysql"
+      end
+      cfg.vm.host_name = "playground-mysql"
+      cfg.vm.network "public_network", ip: "192.168.1.11"
+      cfg.vm.network "forwarded_port", guest: 22, host: 60011, auto_correct: true, id: "ssh"
+      cfg.vm.network "forwarded_port", guest: 3306, host: 60012, auto_correct: true
+      cfg.vm.synced_folder "../shared_data", "/shared_data", disabled: true
+
+      #SSH 셋팅 & mysql 설치
+      cfg.vm.provision "shell", path: "./shell/enable_ssh_password_auth.sh"
+      cfg.vm.provision "shell", path: "./shell/mysql_bootstrap.sh"
+
+      #test sql 실행
+      cfg.vm.provision "file", source: "./script/insert_article.sql", destination: "insert_article.sql"
+      cfg.vm.provision "shell", path: "./shell/insert_article.sh"
+  end
+end

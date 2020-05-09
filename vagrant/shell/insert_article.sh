@@ -1,0 +1,1 @@
+mysql -u root -pPassw0rd! playground < insert_article.sql
