@@ -21,8 +21,6 @@ sudo systemctl restart mysqld
 mysql -u root -pPassw0rd! -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'Passw0rd!'; FLUSH privileges;"
 mysql -u root -pPassw0rd! -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'gateway' IDENTIFIED BY 'Passw0rd!'; FLUSH privileges;"
 mysql -u root -pPassw0rd! -e "CREATE DATABASE IF NOT EXISTS playground"
-mysql -u root -pPassw0rd! -e "CREATE USER 'playground'@'%' IDENTIFIED BY 'playground'; GRANT ALL PRIVILEGES ON *.* TO 'playground'@'%' WITH GRANT OPTION;
-FLUSH privileges;"
 
 
 
