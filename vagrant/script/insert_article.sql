@@ -1,4 +1,4 @@
-DROP TABLE `article` [IF EXISTS];
+DROP TABLE if exists `article`;
 
 CREATE TABLE `article` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
